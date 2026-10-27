@@ -1,0 +1,20 @@
+[project]
+name = "mcp-relearn"
+version = "1.0.0"
+requires-python = ">=3.14"
+dependencies = [
+    "aiohttp>=3.14.5",
+    "lunr>=0.8.0",
+    "mcp[cli]>=2.3.0",
+]
+
+[dependency-groups]
+dev = [
+    "black>=26.1.0",
+    "pytest>=9.0.2",
+    "pytest-aio>=2.0.0",
+    "rapidfuzz>=3.14.6",
+]
+
+[tool.black]
+line-length = 160
