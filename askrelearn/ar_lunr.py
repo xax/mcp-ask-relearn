@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+#
+# SPDX-FileCopyrightText: Copyright (C) XA, II - X 2026.
+# SPDX-License-Identifier: EUPL-1.2
 
 import json
 import re
