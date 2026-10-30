@@ -8,6 +8,7 @@ import re
 import ssl
 import aiohttp
 from lunr import lunr
+from lunr.exceptions import QueryParseError
 from lunr.index import Index
 from lunr.match_data import MatchData
 
@@ -67,10 +68,15 @@ class AR_Lunr(Abstract_ar):
         await super().ask_relearn(search_term=search_term, **kwargs)
         assert self._relearn_index is not None
 
-        results = self._backend_index.search(search_term)
-        _log.debug(results[:10])
+        results = None
+        try:
+            results = self._backend_index.search(search_term)
+            _log.debug(f"Results:\n{results[:10]}")
+        except QueryParseError as e:
+            _log.warning(f'Error parsing query (perhaps unknown tag "tag:…"?): {e}')
 
         if results is None or len(results) < 1:
+            _log.info(f'No search results or error searching for "{search_term}"!')
             return [(search_term, "./NOT_FOUND")]
 
         return [
